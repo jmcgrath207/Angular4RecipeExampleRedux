@@ -17,18 +17,11 @@ export class ShoppingListService {
   ];
 
 
-  get ingredients(): IngredientModel[] {
-    return this._ingredients;
-  }
 
   getingredient(index: number) {
     return this._ingredients[index];
   }
 
-  addIngredient(ingredient: IngredientModel) {
-    this._ingredients.push(ingredient);
-    this.ingredientsChanged.next(this._ingredients.slice());
-  }
 
   addIngredients(ingredients: IngredientModel[]) {
     this._ingredients.push(...ingredients);
@@ -37,7 +30,7 @@ export class ShoppingListService {
 
   updateIngredient(index: number, newIngredient: IngredientModel) {
     this._ingredients[index] = newIngredient;
-    this.ingredientsChanged.next(this.ingredients.slice());
+    this.ingredientsChanged.next(this._ingredients.slice());
   }
 
   deleteIngredient(index: number) {

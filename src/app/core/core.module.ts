@@ -5,7 +5,6 @@ import {HeaderComponent} from './header/header.component';
 import {HomeComponent} from './home/home.component';
 import {SharedModule} from '../Shared/shared.module';
 import {AppRoutingModule} from '../app-routing.module';
-import {ShoppingListService} from '../services/shoppingList.service';
 import {RecipeService} from '../services/recipe.service';
 import {DataStorageService} from '../Shared/data-storage.service';
 import {AuthService} from '../auth/auth.service';
@@ -29,7 +28,7 @@ import {shoppingListReducer} from '../shopping-list/store/shopping-list.reducers
     AppRoutingModule,
     HeaderComponent
   ],
-  providers: [ShoppingListService, RecipeService,
+  providers: [ RecipeService,
     DataStorageService, AuthService,  // interceptors work from top to bottom
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}],

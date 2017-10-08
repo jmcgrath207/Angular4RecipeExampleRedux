@@ -1,10 +1,15 @@
 
 
-import {Effect} from '@ngrx/effects';
+import {Actions, Effect} from '@ngrx/effects';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class AuthEffects {
 
   @Effect()
-  authSignup =
+  authSignup;
+
+  constructor(private actions$: Actions ) {}
+
 
 }

@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {RecipeService} from '../services/recipe.service';
 import {RecipeModel} from '../recipes/recipe.model';
 import 'rxjs';
-import {AuthService} from '../auth/auth.service';
 import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 
 @Injectable()

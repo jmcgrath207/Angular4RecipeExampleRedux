@@ -3,9 +3,7 @@ import * as ShoppingListActions from './shopping-list.actions';
 
 import {IngredientModel} from '../../Shared/Ingredient.model';
 
-export interface AppState {
-  shoppingList: State;
-}
+
 
 export interface State {
   ingredients: IngredientModel[];

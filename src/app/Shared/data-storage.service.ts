@@ -10,31 +10,17 @@ import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/
 export class DataStorageService {
 
   constructor(private httpClient: HttpClient,
-              private recipeService: RecipeService,
-              private authService: AuthService ) {}
+              private recipeService: RecipeService) {}
 
     storeRecipes() {
-      const token = this.authService.getToken();
-/* /!*     const headers = new HttpHeaders().set('Authorization', "asdfasdfasdf").append("asdfsa","asdfsafd");*!/
-      return this.httpClient.put('https://angular4recipe.firebaseio.com/recipes.json',
-        this.recipeService.recipes, {
-        observe: 'body',
-          params: new HttpParams().set('auth', token)
-/!*          headers: headers*!/
-        });*/
-
-      // return type for upload or download status to be tracked in webapp
-/*      const req = new HttpRequest( 'PUT', 'https://angular4recipe.firebaseio.com/recipes.json',
-        this.recipeService.recipes, {reportProgress: true, params: new HttpParams().set('auth', token)});*/
       const req = new HttpRequest( 'PUT', 'https://angular4recipe.firebaseio.com/recipes.json',
         this.recipeService.recipes, {reportProgress: true});
       return this.httpClient.request(req);
     }
 
     getRecipes() {
-    const token = this.authService.getToken();
 
-      this.httpClient.get<RecipeModel[]>('https://angular4recipe.firebaseio.com/recipes.json?auth=' + token,
+      this.httpClient.get<RecipeModel[]>('https://angular4recipe.firebaseio.com/recipes.json',
         {
         observe: 'body',
         responseType: 'json'

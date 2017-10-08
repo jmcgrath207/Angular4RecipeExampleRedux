@@ -7,7 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import * as firebase from 'firebase';
-import  { fromPromise} from 'rxjs/observable/fromPromise';
+import { fromPromise} from 'rxjs/observable/fromPromise';
 
 @Injectable()
 export class AuthEffects {
@@ -31,6 +31,27 @@ export class AuthEffects {
           payload: token
         }
         ];
+    });
+
+  @Effect()
+  authSignin = this.actions$.ofType(AuthActions.TRY_SIGNIN)
+    .map((action: AuthActions.TrySignup) => {
+      return action.payload;
+    })
+    .switchMap((authData: {username: string, password: string}) => {
+      return fromPromise(firebase.auth().signInWithEmailAndPassword(authData.username, authData.password));
+    }).switchMap( () => {
+      return fromPromise(firebase.auth().currentUser.getToken());
+    }).mergeMap( (token: string) => {
+      return [
+        {
+          type: AuthActions.SIGNIN
+        },
+        {
+          type: AuthActions.SET_TOKEN,
+          payload: token
+        }
+      ];
     });
 
   constructor(private actions$: Actions ) {}

@@ -12,7 +12,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../Shared/auth.interceptor';
 import {LoggingInterceptor} from '../Shared/logging.interceptor';
 import {StoreModule} from '@ngrx/store';
-import {shoppingListReducer} from '../shopping-list/store/shopping-list.reducers';
+import { reducers } from '../store/app.reducers';
 
 @NgModule({
   declarations : [
@@ -22,7 +22,7 @@ import {shoppingListReducer} from '../shopping-list/store/shopping-list.reducers
   imports: [
     SharedModule,
     AppRoutingModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer})
+    StoreModule.forRoot(reducers)
   ],
   exports: [
     AppRoutingModule,

@@ -1,6 +1,7 @@
 
 import {RecipeModel} from '../recipe.model';
 import {IngredientModel} from '../../Shared/Ingredient.model';
+import * as RecipeActions from './recipe.actions';
 
 
 export interface FeatureState {
@@ -30,6 +31,38 @@ const initialState: State = {
     ])
 ] };
 
-export function  recipeReducer(state = initialState, action) {
-  return state;
+export function  recipeReducer(state = initialState, action: RecipeActions.RecipeActions) {
+  switch (action.type) {
+    case (RecipeActions.SET_RECIPIE):
+      return {
+        ...state,
+        recipes: [...action.payload]
+      };
+    case (RecipeActions.ADD_RECIPIE):
+      return {
+        ...state,
+        recipes: [...state.recipes, action.payload]
+      };
+    case (RecipeActions.UPDATE_RECIPIE) :
+      const recipe = state.recipes[action.payload.index];
+      const updatedRecipe = {
+        ...recipe,
+        ...action.payload.updatedRecipe
+      };
+      const recipes = [...state.recipes];
+      recipes[action.payload.index] = updatedRecipe;
+      return {
+        ...state,
+        recipes: recipes
+      };
+    case (RecipeActions.DELETE_RECIPIE):
+      const oldRecipes = [...state.recipes];
+      oldRecipes.splice(action.payload, 1);
+      return {
+        ...state,
+        recipes: oldRecipes
+      };
+    default:
+      return state;
+  }
 }

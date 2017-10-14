@@ -14,6 +14,7 @@ import {StoreModule} from '@ngrx/store';
 import { reducers } from '../store/app.reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from '../auth/store/auth.effects';
+import {StoreRouterConnectingModule} from '@ngrx/router-store';
 
 @NgModule({
   declarations : [
@@ -24,7 +25,8 @@ import {AuthEffects} from '../auth/store/auth.effects';
     SharedModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    StoreRouterConnectingModule
   ],
   exports: [
     AppRoutingModule,
